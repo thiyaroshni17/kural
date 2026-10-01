@@ -1,0 +1,79 @@
+{
+  "_verified_live_on": "2026-10-01 against https://register.eshram.gov.in/#/user/self — selectors confirmed via live DOM inspection. The OTP box only mounts after a real SMS is sent, so it could not be verified without a real phone; the script ends after the captcha step and hands back to her to finish the rest herself.",
+  "success_selector": null,
+  "steps": [
+    {
+      "id": "mobile",
+      "selector": "#mobileNumber",
+      "type": "number",
+      "prompt": {
+        "ta": "ஈ-ஸ்ரம் அட்டை பதிவிற்கு, ஆதாருடன் இணைந்த பத்து இலக்க கைபேசி எண்ணை சொல்லுங்கள்.",
+        "hi": "ई-श्रम कार्ड पंजीकरण के लिए, आधार से जुड़ा दस अंकों का मोबाइल नंबर बताइए।",
+        "te": "ఈ-శ్రమ్ కార్డు నమోదు కోసం, ఆధార్‌తో అనుసంధానించిన పది అంకెల మొబైల్ నంబర్ చెప్పండి."
+      },
+      "help": {
+        "ta": "பத்து இலக்கங்களை மெதுவாக சொல்லுங்கள்.",
+        "hi": "दस अंक धीरे-धीरे बोलिए।",
+        "te": "పది అంకెలను నెమ్మదిగా చెప్పండి."
+      },
+      "validate": "digits:10"
+    },
+    {
+      "id": "epfo",
+      "type": "choice",
+      "prompt": {
+        "ta": "நீங்கள் EPFO-வில் (Employees' Provident Fund) உறுப்பினராக உள்ளீர்களா? ஆம் அல்லது இல்லை என சொல்லுங்கள்.",
+        "hi": "क्या आप EPFO (Employees' Provident Fund) की सदस्य हैं? हां या नहीं कहिए।",
+        "te": "మీరు EPFO (Employees' Provident Fund)లో సభ్యురాలా? అవును లేదా కాదు అని చెప్పండి."
+      },
+      "help": {
+        "ta": "ஆம் அல்லது இல்லை என மட்டும் சொல்லுங்கள்.",
+        "hi": "सिर्फ हां या नहीं कहिए।",
+        "te": "అవును లేదా కాదు అని మాత్రమే చెప్పండి."
+      },
+      "options": {
+        "ta": ["ஆம்", "இல்லை"],
+        "hi": ["हां", "नहीं"],
+        "te": ["అవును", "కాదు"]
+      },
+      "radio_map": { "ஆம்": "#epfo_yes", "இல்லை": "#epfo_no", "हां": "#epfo_yes", "नहीं": "#epfo_no", "అవును": "#epfo_yes", "కాదు": "#epfo_no" },
+      "validate": null
+    },
+    {
+      "id": "esic",
+      "type": "choice",
+      "prompt": {
+        "ta": "நீங்கள் ESIC-வில் (Employees' State Insurance) உறுப்பினராக உள்ளீர்களா? ஆம் அல்லது இல்லை என சொல்லுங்கள்.",
+        "hi": "क्या आप ESIC (Employees' State Insurance) की सदस्य हैं? हां या नहीं कहिए।",
+        "te": "మీరు ESIC (Employees' State Insurance)లో సభ్యురాలా? అవును లేదా కాదు అని చెప్పండి."
+      },
+      "help": {
+        "ta": "ஆம் அல்லது இல்லை என மட்டும் சொல்லுங்கள்.",
+        "hi": "सिर्फ हां या नहीं कहिए।",
+        "te": "అవును లేదా కాదు అని మాత్రమే చెప్పండి."
+      },
+      "options": {
+        "ta": ["ஆம்", "இல்லை"],
+        "hi": ["हां", "नहीं"],
+        "te": ["అవును", "కాదు"]
+      },
+      "radio_map": { "ஆம்": "#esic_yes", "இல்லை": "#esic_no", "हां": "#esic_yes", "नहीं": "#esic_no", "అవును": "#esic_yes", "కాదు": "#esic_no" },
+      "validate": null
+    },
+    {
+      "id": "captcha",
+      "selector": "#inputCaptcha",
+      "type": "captcha",
+      "prompt": {
+        "ta": "திரையில் உள்ள படத்தில் காணும் எழுத்துக்களை நீங்களே தட்டச்சு செய்யவும்.",
+        "hi": "स्क्रीन पर दिख रही तस्वीर में लिखे अक्षर खुद टाइप करें।",
+        "te": "తెరపై కనిపించే చిత్రంలోని అక్షరాలను మీరే టైప్ చేయండి."
+      },
+      "help": {
+        "ta": "இதை குரல் செய்ய முடியாது. நீங்களே பெட்டியில் தட்டச்சு செய்யவும்.",
+        "hi": "यह काम आवाज़ नहीं कर सकती। आप खुद बॉक्स में टाइप करें।",
+        "te": "దీన్ని స్వరం చేయలేదు. మీరే పెట్టెలో టైప్ చేయండి."
+      }
+    }
+  ]
+}

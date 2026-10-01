@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>குரல் • KURAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div id="bg">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="blob b4"></span>
+    <div class="bg-grid"></div>
+  </div>
+
+  <div id="app">
+    <!-- Top Glass Navigation Bar -->
+    <header id="top-bar">
+      <div class="brand-badge">
+        <span class="brand-sparkle">✨</span>
+        <div class="brand-meta">
+          <span class="brand-title" id="brand-title-text">குரல் <span class="brand-sub">KURAL</span></span>
+          <span class="brand-tag"><span class="live-dot"></span> குரல் வழிகாட்டி • AI Voice Assistant</span>
+        </div>
+      </div>
+
+      <div id="lang-picker">
+        <button class="lang-btn" data-lang="ta">தமிழ்</button>
+        <button class="lang-btn" data-lang="hi">हिन्दी</button>
+        <button class="lang-btn" data-lang="te">తెలుగు</button>
+      </div>
+
+      <div class="top-actions">
+        <div id="progression-pill" class="progression-pill" title="கற்றல் முன்னேற்றம் • Learning Progression">
+          <span class="prog-icon">🪜</span>
+          <span id="prog-text">0 சுயமாக</span>
+          <span class="prog-badge" id="prog-badge">🏅 தொடக்கம்</span>
+        </div>
+        <button id="clear-btn" class="clear-icon-btn" title="மீண்டும் தொடங்கு • Reset">↺</button>
+      </div>
+    </header>
+
+    <!-- Scam Shield Warning Bar (shown when non-gov site detected) -->
+    <div id="scam-shield" style="display:none;">
+      <span class="scam-icon">🚨</span>
+      <span id="scam-text"></span>
+    </div>
+
+    <!-- Interactive Progress Stepper -->
+    <nav id="stepper" aria-label="Progress">
+      <div class="step active" data-step="0">
+        <span class="dot">1</span>
+        <span class="label"></span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" data-step="1">
+        <span class="dot">2</span>
+        <span class="label"></span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" data-step="2">
+        <span class="dot">3</span>
+        <span class="label"></span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" data-step="3">
+        <span class="dot">4</span>
+        <span class="label"></span>
+      </div>
+    </nav>
+
+    <!-- Live Learning Ladder (always visible initially itself, updates during form filling) -->
+    <div id="live-ladder">
+      <div class="ll-header">
+        <span class="ll-title-icon">🪜</span>
+        <span id="ll-title"></span>
+      </div>
+      <div class="ll-bar-wrap">
+        <div class="ll-bar">
+          <div class="ll-seg auto" id="ll-auto"></div>
+          <div class="ll-seg guide" id="ll-guide"></div>
+          <div class="ll-seg solo" id="ll-solo"></div>
+        </div>
+      </div>
+      <div class="ll-legend">
+        <span class="ll-chip auto" id="ll-chip-auto"></span>
+        <span class="ll-chip guide" id="ll-chip-guide"></span>
+        <span class="ll-chip solo" id="ll-chip-solo"></span>
+      </div>
+    </div>
+
+    <!-- Avatar & Assistant Stage -->
+    <div id="avatar-wrap">
+      <div class="avatar-halo"></div>
+      <div id="avatar">
+        <!-- Talk/listen rings rendered as CSS overlays on the photo -->
+        <div class="avatar-ring-wrap">
+          <div id="talk-ring-div"></div>
+          <div id="listen-ring-div"></div>
+          <img id="avatar-photo" src="assets/avatar_ta.jpg" alt="Thozhi" width="230" height="230">
+        </div>
+      </div>
+
+      <!-- Live Voice Status with Animated Equalizer Bars -->
+      <div id="status">
+        <div class="audio-equalizer">
+          <span class="eq-bar bar1"></span>
+          <span class="eq-bar bar2"></span>
+          <span class="eq-bar bar3"></span>
+          <span class="eq-bar bar4"></span>
+        </div>
+        <span id="status-text"></span>
+      </div>
+    </div>
+
+    <!-- Speech Caption / Dialogue Bubble -->
+    <div id="caption-wrap">
+      <div id="caption"></div>
+    </div>
+
+    <!-- ① Live transcript pill: real-time STT output while user speaks -->
+    <div id="live-transcript">
+      <div class="lt-mic-wrap">
+        <span id="lt-mic">🎙️</span>
+      </div>
+      <div class="lt-content">
+        <span id="lt-speaker"></span>
+        <span id="lt-text"></span>
+      </div>
+      <div class="lt-wave">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <!-- Hero Call-to-Action Start Button -->
+    <div class="start-btn-wrap">
+      <button id="start-btn"></button>
+      <div class="start-btn-glow"></div>
+      <p class="start-btn-hint">🎙️ மைக் பொத்தானை அழுத்தவும் அல்லது பேச தொடங்குங்கள்</p>
+    </div>
+
+    <!-- ② Editable confirmation overlay -->
+    <div id="confirm-overlay">
+      <div id="confirm-card">
+        <div id="confirm-header">
+          <div class="confirm-icon-box">
+            <span id="confirm-icon">✔️</span>
+          </div>
+          <div class="confirm-header-text">
+            <span id="confirm-title"></span>
+            <span class="confirm-subtitle">விவரங்களை சரிபார்க்கவும் அல்லது திருத்தவும்</span>
+          </div>
+        </div>
+        <div class="confirm-input-wrap">
+          <label id="confirm-field-label"></label>
+          <input id="confirm-field-input" autocomplete="off" spellcheck="false">
+        </div>
+        <div id="confirm-hint"></div>
+        <div id="confirm-actions">
+          <button id="confirm-btn-retry">
+            <span class="btn-icon">🔁</span>
+            <span id="cbr-label">மீண்டும் பேசு</span>
+          </button>
+          <button id="confirm-btn-yes">
+            <span class="btn-icon">✅</span>
+            <span id="cby-label">சரி, நிரப்பு</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ Screencast + field-log side-by-side wrapper -->
+    <div id="form-area">
+      <div id="screencast-wrap">
+        <!-- Mac/Browser Style Header Bar -->
+        <div id="screencast-header-bar">
+          <div class="browser-dots">
+            <span class="b-dot red"></span>
+            <span class="b-dot yellow"></span>
+            <span class="b-dot green"></span>
+          </div>
+          <div id="screencast-label"></div>
+          <div class="sc-badge-live">
+            <span class="pulse-live"></span>
+            <span>LIVE PORTAL</span>
+          </div>
+        </div>
+
+        <!-- Interactive mode toolbar -->
+        <div id="sc-toolbar">
+          <div class="sc-toolbar-left">
+            <span id="sc-mode-badge">👁 கவனி</span>
+            <button id="sc-interact-btn" title="Toggle interactive mode">🖱️ தொட்டு திருத்து</button>
+          </div>
+          <div class="sc-toolbar-right">
+            <span id="sc-keyboard-hint" style="display:none">⌨️ தட்டச்சு செய்யவும் — <kbd>Esc</kbd> வெளியேற</span>
+            <div class="sc-user-tip">💡 கிளிக் செய்து CAPTCHA தட்டச்சு செய்யலாம்</div>
+          </div>
+        </div>
+
+          <!-- Canvas replaces <img> — renders frames and captures input -->
+        <div id="sc-container">
+          <canvas id="screencast-canvas"></canvas>
+          <div id="sc-notice" class="server-help-banner" style="display:none;"></div>
+          <!-- Transparent click-capture overlay (only active in interactive mode) -->
+          <div id="sc-overlay" tabindex="0" style="display:none" aria-label="Interactive government form"></div>
+          <!-- Custom cursor dot shown over the overlay -->
+          <div id="sc-cursor"></div>
+          <!-- Touch keyboard trigger for mobile -->
+          <input id="sc-key-sink" type="text" autocomplete="off" autocorrect="off"
+                 autocapitalize="off" spellcheck="false" aria-hidden="true">
+        </div>
+        <!-- Keep the original img for WebSocket FRAME messages (hidden, used as data sink) -->
+        <img id="screencast" alt="" style="display:none">
+      </div>
+
+      <!-- ④ Collected fields log: live editable list of filled values -->
+      <div id="field-log" style="display:none;"></div>
+    </div>
+
+    <!-- Scheme Discovery Cards -->
+    <div id="cards"></div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
