@@ -316,13 +316,19 @@ function setStep(n) {
 }
 
 function getBackendBase() {
-  // If running directly on port 8787, use relative path:
-  if (location.port === "8787") {
-    return { http: "", ws: `ws://${location.host}` };
+  // Local static preview (python http.server 5500, Live Server 5501, file protocol):
+  // the backend runs separately on 8787.
+  const isLocalStaticPreview =
+    (location.hostname === "localhost" || location.hostname === "127.0.0.1") &&
+    location.port !== "8787" && location.port !== "";
+  if (isLocalStaticPreview) {
+    const host = location.hostname;
+    return { http: `http://${host}:8787`, ws: `ws://${host}:8787` };
   }
-  // If running via python http.server 5500, Live Server 5501, or file protocol:
-  const host = location.hostname || "localhost";
-  return { http: `http://${host}:8787`, ws: `ws://${host}:8787` };
+  // Running directly off the Node server (local on 8787, or deployed on Render) —
+  // same origin, matching the page's own protocol.
+  const wsProto = location.protocol === "https:" ? "wss" : "ws";
+  return { http: "", ws: `${wsProto}://${location.host}` };
 }
 
 // Try the server's real voice (Azure neural / Google Translate backend) first.
